@@ -36,26 +36,7 @@ def scrape():
     userfile.close()
     exp_list = []
 
-    for user in user_list:
-        k = randint(80, 120)
-        n = randint(70, k)
-        time.sleep(n)
-        driver.get('https://www.linkedin.com/in/'+user)
-        html = driver.page_source
-        source = BeautifulSoup(html, 'html.parser')
-
-        sections = source.find_all('section')
-        skills = []
-
-        name = None
-        headline = None
-        location = None
-        connections = None
-        first_text = None
-        work_name = None
-        school_name = None
-
-            for section in sections:
+        for section in sections:
 
         section_class = section.get('class')
         section_class = ' '.join(section_class)
@@ -93,10 +74,19 @@ def scrape():
 
             n = randint(4, 14)
             time.sleep(n)
-            exp_divs = section.find_all('div', {'class': 'pv-entity__summary-info'})
+            try:
+                exp_divs = section.find_all('div', {'class': 'pv-entity__summary-info'})
+            except:
+                pass
             for exp_div in exp_divs:
-                work_name = exp_div.find('h3', {'class': 'Sans-17px-black-85%-semibold'}).text
-                exp_div_h4 = exp_div.find_all('h4')
+                try:
+                    work_name = exp_div.find('h3', {'class': 'Sans-17px-black-85%-semibold'}).text
+                except:
+                    pass
+                try:
+                    exp_div_h4 = exp_div.find_all('h4')
+                except:
+                    pass
                 print(work_name)
                 for exp_div1 in exp_div_h4:
                     print(exp_div1.text)
@@ -109,27 +99,45 @@ def scrape():
 
             n = randint(4, 14)
             time.sleep(n)
-            edu_divs = section.find_all('div', {'class': 'pv-entity__summary-info'})
+            try:
+                edu_divs = section.find_all('div', {'class': 'pv-entity__summary-info'})
+            except:
+                pass
             for edu_div in edu_divs:
-                school_name = edu_div.find('h3', {'class': 'pv-entity__school-name Sans-17px-black-85%-semibold'}).text
-                edu_div_h4s = edu_div.find_all('span', {'class': 'pv-entity__comma-item'})
+                try:
+                    school_name = edu_div.find('h3', {'class': 'pv-entity__school-name Sans-17px-black-85%-semibold'}).text
+                except:
+                    pass
+                try:
+                    edu_div_h4s = edu_div.find_all('span', {'class': 'pv-entity__comma-item'})
+                except:
+                    pass
                 print(school_name)
                 for edu_div_h4 in edu_div_h4s:
                     print(edu_div_h4.text)
 
 
 
-        elif section_class == 'pv-profile-section volunteering-section ember-view':
+         elif section_class == 'pv-profile-section volunteering-section ember-view':
             print('volunteer section --------------------')
 
 
             n = randint(4, 14)
             time.sleep(n)
-            vol_uls = section.find_all('ul', {'class': 'pv-profile-section__section-info section-info pv-profile-section__section-info--has-no-more ember-view'})
+            try:
+                vol_uls = section.find_all('ul', {'class': 'pv-profile-section__section-info section-info pv-profile-section__section-info--has-no-more ember-view'})
+            except:
+                pass
             for vol_ul in vol_uls:
-                vol_name = vol_ul.find('h3', {'class': 'Sans-17px-black-85%-semibold'}).text
+                try:
+                    vol_name = vol_ul.find('h3', {'class': 'Sans-17px-black-85%-semibold'}).text
+                except:
+                    pass
                 print(vol_name)
-                vol_div_h4 = vol_ul.find_all('h4')
+                try:
+                    vol_div_h4 = vol_ul.find_all('h4')
+                except:
+                    pass
                 for vol_div1 in vol_div_h4:
                     print(vol_div1.text)
 
@@ -140,14 +148,23 @@ def scrape():
 
             n = randint(4, 14)
             time.sleep(n)
-            header = section.find('h2', {'class': 'pv-profile-section__card-heading Sans-21px-black-85%'})
+            try:
+                header = section.find('h2', {'class': 'pv-profile-section__card-heading Sans-21px-black-85%'})
+            except:
+                pass
             if header == 'Skills & Endorsements':
-                spans = section.find_all('span', {'class': 'Sans-17px-black-100%-semibold'})
+                try:
+                    spans = section.find_all('span', {'class': 'Sans-17px-black-100%-semibold'})
+                except:
+                    pass
                 for span in spans:
                     skills.append(span.text)
                 print(*skills)
             elif header == 'Skills':
-                ps = section.find_all('p', {'class': 'pv-skill-category-entity__name  Sans-17px-black-100%-semibold'})
+                try:
+                    ps = section.find_all('p', {'class': 'pv-skill-category-entity__name  Sans-17px-black-100%-semibold'})
+                except:
+                    pass
                 for par in ps:
                     skills.append(par.text)
                 print(*skills)
@@ -155,9 +172,18 @@ def scrape():
         elif section_class == 'pv-profile-section pv-accomplishments-section artdeco-container-card ember-view':
             print('accomplishments section --------------------')
 
-            acc_h3s = list(section.find_all('h3', {'class': 'pv-entity__summary-info'}))
-            acc_h3s_no = list(section.find_all('h3', {'class': 'pv-accomplishments-block__count Sans-34px-black-100% pr3'}))
-            ul_list = list(section.find('ul', {'class': 'pv-accomplishments-block__summary-list Sans-15px-black-70% pv-accomplishments-block__summary-list-more'}))
+            try:
+                acc_h3s = list(section.find_all('h3', {'class': 'pv-entity__summary-info'}))
+            except:
+                pass
+            try:
+                acc_h3s_no = list(section.find_all('h3', {'class': 'pv-accomplishments-block__count Sans-34px-black-100% pr3'}))
+            except:
+                pass
+            try:
+                ul_list = list(section.find('ul', {'class': 'pv-accomplishments-block__summary-list Sans-15px-black-70% pv-accomplishments-block__summary-list-more'}))
+            except:
+                pass
             for i in range(0, len(acc_h3s)):
                 print(acc_h3s[i].text)
                 print(acc_h3s_no[i].text)
@@ -168,7 +194,10 @@ def scrape():
 
         elif section_class == 'pv-profile-section pv-interests-section artdeco-container-card ember-view':
             print('asdf section --------------------')
-            spans_interests = section_class.find_all('span', {'class': 'pv-entity__summary-title-text'})
+            try:
+                spans_interests = section_class.find_all('span', {'class': 'pv-entity__summary-title-text'})
+            except:
+                pass
             for span_interest in spans_interests:
                 span_interest.text
 
@@ -178,10 +207,19 @@ def scrape():
 
             n = randint(4, 14)
             time.sleep(n)
-            rec_lis = section.find_all('li', {'class': 'pv-recommendation-entity ember-view'})
+            try:
+                rec_lis = section.find_all('li', {'class': 'pv-recommendation-entity ember-view'})
+            except:
+                pass
             for rec_li in rec_lis:
-                person = rec_li.find('div', {'class': 'pv-recommendation-entity__header'})
-                letter = rec_li.find('div', {'class': 'pv-recommendation-entity__highlights'})
+                try:
+                    person = rec_li.find('div', {'class': 'pv-recommendation-entity__header'})
+                except:
+                    pass
+                try:
+                    letter = rec_li.find('div', {'class': 'pv-recommendation-entity__highlights'})
+                except:
+                    pass
                 print(person)
                 print(letter)
 
