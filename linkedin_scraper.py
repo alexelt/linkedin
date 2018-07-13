@@ -35,6 +35,24 @@ def scrape():
     user_list = list(set(user_list))
     userfile.close()
     exp_list = []
+    
+    k = randint(80, 120)
+        n = randint(70, k)
+        time.sleep(n)
+        driver.get('https://www.linkedin.com/in/'+user)
+        html = driver.page_source
+        source = BeautifulSoup(html, 'html.parser')
+
+        sections = source.find_all('section')
+        skills = []
+
+        name = None
+        headline = None
+        location = None
+        connections = None
+        first_text = None
+        work_name = None
+        school_name = None
 
         for section in sections:
 
