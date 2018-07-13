@@ -37,24 +37,24 @@ def scrape():
     exp_list = []
     
     k = randint(80, 120)
-        n = randint(70, k)
-        time.sleep(n)
-        driver.get('https://www.linkedin.com/in/'+user)
-        html = driver.page_source
-        source = BeautifulSoup(html, 'html.parser')
+    n = randint(70, k)
+    time.sleep(n)
+    driver.get('https://www.linkedin.com/in/'+user)
+    html = driver.page_source
+    source = BeautifulSoup(html, 'html.parser')
 
-        sections = source.find_all('section')
-        skills = []
+    sections = source.find_all('section')
+    skills = []
 
-        name = None
-        headline = None
-        location = None
-        connections = None
-        first_text = None
-        work_name = None
-        school_name = None
+    name = None
+    headline = None
+    location = None
+    connections = None
+    first_text = None
+    work_name = None
+    school_name = None
 
-        for section in sections:
+    for section in sections:
 
         section_class = section.get('class')
         section_class = ' '.join(section_class)
