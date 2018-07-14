@@ -16,8 +16,8 @@ def login():
     driver.get("https://linkedin.com")  # opens up chrome - okcupid
     agent = driver.execute_script("return navigator.userAgent")
     print(agent)
-    user_name = "evich_blah@mail.com"  # give username
-    password = "1234567890As!"  # give password
+    user_name = ""  # give username
+    password = ""  # give password
     n = randint(0, 10)
     time.sleep(n)
 
