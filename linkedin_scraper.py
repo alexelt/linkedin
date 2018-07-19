@@ -43,6 +43,12 @@ def scrape():
         k = randint(80, 120)
         n = randint(70, k)
         time.sleep(n)
+        try:
+            buttons = driver.browser.find_elements_by_css('.pv-profile-section__see-more-inline.pv-profile-section__text-truncate-toggle.link')
+            for button in buttons:
+                button.click()
+        except Nosuch:
+            pass
         driver.get('https://www.linkedin.com/in/' + user)
         html = driver.page_source
         source = BeautifulSoup(html, 'html.parser')
